@@ -1,21 +1,22 @@
 ---
+import AddChallenge from "../components/AddChallenge.astro";
+import ChallengesList from "../components/ChallengesList.astro";
 import Layout from "../layouts/Layout.astro";
+import { getUserChallenges } from "../lib/db";
+
+const user = await Astro.locals.currentUser();
+if(!user) return new Response("Unauthorized", { status: 401 });
+const challenges = await getUserChallenges(user.id);
 ---
 
 <Layout title="🔐Privado - Tus Retos Personales">
-	<main class="max-w-xl mx-auto py-12">
-		<h1 class="text-3xl font-bold">Tus Retos Personales</h1>
-        <p class="mt-12"> Esta pagina está protegida y solo es accesible para usuarios autenticados. Aquí puedes ver tus retos personales.</p>
-        <ul>
-            <li class="mt-4">
-                <a href="/challenges/1" class="text-blue-500 hover:underline">Reto 1: Leer un libro al mes</a>
-            </li>
-            <li class="mt-4">
-                <a href="/challenges/2" class="text-blue-500 hover:underline">Reto 2: Hacer ejercicio 3 veces por semana</a>
-            </li>
-            <li class="mt-4">
-                <a href="/challenges/3" class="text-blue-500 hover:underline">Reto 3: Aprender un nuevo idioma</a>
-            </li>
-        </ul>
-	</main>
+  <main class="max-w-xl mx-auto py-12">
+    <h1 class="text-3xl font-bold">Tus Retos Personales</h1>
+    <p class="mt-12">
+      Esta pagina está protegida y solo es accesible para usuarios autenticados.
+      Aquí puedes ver tus retos personales.
+    </p>
+    <ChallengesList retos={challenges}/>
+    <AddChallenge />
+  </main>
 </Layout>
