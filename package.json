@@ -9,6 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.9.2"
+    "@astrojs/node": "^9.2.2",
+    "@clerk/astro": "^2.9.0",
+    "@clerk/localizations": "^3.16.4",
+    "@clerk/themes": "^2.2.49",
+    "@tailwindcss/vite": "^4.1.8",
+    "astro": "^5.9.2",
+    "tailwindcss": "^4.1.8"
   }
 }
